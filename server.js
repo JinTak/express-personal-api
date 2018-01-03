@@ -39,7 +39,7 @@ app.get('/api', function api_index(req, res) {
   // TODO: Document all your api endpoints below
   res.json({
     woops_i_has_forgot_to_document_all_my_endpoints: false, // CHANGE ME ;)
-    message: "Welcome to my personal api! Here's what you need to know!",
+    message: "Hi, I'm Jin. Welcome to my personal api! Here's what you need to know!",
     documentation_url: "https://github.com/JinTak/express-personal-api/blob/master/README.md", // CHANGE ME
     base_url: "https://afternoon-inlet-66263.herokuapp.com/", // CHANGE ME
     endpoints: [
@@ -48,6 +48,22 @@ app.get('/api', function api_index(req, res) {
       {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
     ]
   })
+});
+
+app.get('/api/profile', () => {
+  let jinProfile = {
+    name: "Jin Tak",
+    github_link: "https://github.com/JinTak",
+    github_profile_image: "https://avatars0.githubusercontent.com/u/33187157?s=400&v=4",
+    current_city: "Denver",
+    pets: {
+      name: "Mimi",
+      breed: "Yorkie",
+      gender: "Female"
+    }
+  }
+
+  res.json(jinProfile);
 });
 
 
