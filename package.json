@@ -18,7 +18,10 @@
   "homepage": "https://github.com/SF-WDI-LABS/express_self_api",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "bower": "^1.8.2",
     "express": "^4.13.4",
+    "express-session": "^1.15.6",
+    "method-override": "^2.3.10",
     "mongoose": "^4.4.10"
   }
 }
