@@ -50,7 +50,10 @@ app.get('/api', function api_index(req, res) {
   })
 });
 
-app.get('/api/profile', function(req, res) {
+// =====================
+// Route to Profile API
+// =====================
+app.get('/api/profile', (req, res) => {
   var jinProfile = {
     name: "Jin Tak",
     github_link: "https://github.com/JinTak",
@@ -65,6 +68,14 @@ app.get('/api/profile', function(req, res) {
 
   res.json(jinProfile);
 });
+
+// =====================
+// Route to...
+// =====================
+app.get('/api/index', (req, res) => {
+
+});
+
 
 
 

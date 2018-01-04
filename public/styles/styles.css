@@ -1,7 +1,7 @@
 body {
   color: #333;
   font-family: Helvetica, Arial, sans-serif;
-  background-color: skyblue; /* Sanity Check! */
+  background-image: url('/images/main-background.jpg'); /* Sanity Check! */
 }
 
 h1 {
