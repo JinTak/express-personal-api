@@ -65,20 +65,22 @@ app.get('/api/profile', (req, res) => {
 
   // Figuring out how many days old I am
   let birthDate = new Date(1989, 08, 04);
-  // First figure out how many days I was alive in my birth year. I was born 9/4/1989. This value will be a constant
-  const daysAliveInBirthYear = 26 + 31 + 30 + 31; // 118 DAYS => 26 days in Sep, 31 days in Oct, 30 days in Nov, 31 days in Dec
-  // console.log(daysAliveInBirthYear);
+  let totalDaysAlive = (today.getTime() - birthDate.getTime()) / 1000 / 60 / 60 / 24;
 
-  // Next figure out how many days I was alive inbetween 1990 and current year minus one
-  let daysAliveBetween = 365 * (today.getFullYear() - 1990); // 10,220 days (365 * 28);
-  // console.log(daysAliveBetween);
+  // // First figure out how many days I was alive in my birth year. I was born 9/4/1989. This value will be a constant
+  // const daysAliveInBirthYear = 26 + 31 + 30 + 31; // 118 DAYS => 26 days in Sep, 31 days in Oct, 30 days in Nov, 31 days in Dec
+  // // console.log(daysAliveInBirthYear);
 
-  // Next figure out how many days I was alive this year
-  let daysAliveThisYear = today.getMonth() + today.getDay();
-  // console.log(daysAliveThisYear);
+  // // Next figure out how many days I was alive inbetween 1990 and current year minus one
+  // let daysAliveBetween = 365 * (today.getFullYear() - 1990); // 10,220 days (365 * 28);
+  // // console.log(daysAliveBetween);
+
+  // // Next figure out how many days I was alive this year
+  // let daysAliveThisYear = today.getMonth() + today.getDay();
+  // // console.log(daysAliveThisYear);
   
-  // Now, add all days together
-  let totalDaysAlive = daysAliveInBirthYear + daysAliveBetween + daysAliveThisYear;
+  // // Now, add all days together
+  // let totalDaysAlive = daysAliveInBirthYear + daysAliveBetween + daysAliveThisYear;
 
   // Figuring out if I am hungry and awake.
   let time = today.getHours();
