@@ -132,26 +132,29 @@ app.get('/api/nbaplayers/:id', (req, res) => {
 // 3. Route to CREATE NBA Player
 // ==================================
 app.post('/api/nbaplayers', (req, res) => {
-  
-  var newPlayer = new db.NBAPlayers({
-    name: req.body.name,
-    nickname: req.body.nickname,
-    number: req.body.number,
-    position: req.body.position,
-    team: req.body.team
-  }); 
 
-  db.NBAPlayers.create(newPlayer, (err, nbaPlayer) => {
-    if(err) {
-      console.log("Sorry, could not create new player.")
-    } else {
-      if(!req.body.name || !req.body.nickname || !req.body.number || !req.body.position || !req.body.team ){
-        res.json("Please enter name, nickname, number, position, and team properties.");
+  if(!req.body.name || !req.body.nickname || !req.body.number || !req.body.position || !req.body.team ){
+    res.json("Please enter name, nickname, number, position, and team properties.");
+  } else {
+
+    var newPlayer = new db.NBAPlayers({
+      name: req.body.name,
+      nickname: req.body.nickname,
+      number: req.body.number,
+      position: req.body.position,
+      team: req.body.team
+    }); 
+
+    db.NBAPlayers.create(newPlayer, (err, nbaPlayer) => {
+      if(err) {
+        console.log("Sorry, could not create new player.")
       } else {
-        res.json("Created new player: " + nbaPlayer);
+        
+          res.json("Created new player: " + nbaPlayer);
+        
       }
-    }
-  });
+    });
+  }
 
 });
 
@@ -190,6 +193,7 @@ app.delete('/api/nbaplayers/:id', (req, res) => {
       }
       else {
         res.json("Successfully removed " + playerToDelete + "!");
+      }
     }); 
     
   });
