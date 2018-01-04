@@ -47,7 +47,11 @@ app.get('/api', function api_index(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "GET", path: "/api/index", description: "Shows my favorite NBA players."} // CHANGE ME
+      {method: "GET", path: "/api/nbaplayers", description: "Shows my favorite NBA players."}, // CHANGE ME
+      {method: "GET", path: "/api/nbaplayers/:id", description: "Shows ONE of my favorite NBA players."}, // CHANGE ME
+      {method: "POST", path: "/api/nbaplayers", description: "CREATES an NBA player."}, // CHANGE ME
+      {method: "PUT", path: "/api/nbaplayers/:id", description: "UPDATES one of my favorite NBA players."}, // CHANGE ME
+      {method: "DELETE", path: "/api/nbaplayers/:id", description: "DELETES on of my favorite NBA players."} // CHANGE ME
     ]
   })
 });
@@ -75,10 +79,46 @@ app.get('/api/profile', (req, res) => {
 //  CRUD ROUTES
 ///////////////////
 
-// =============================================
-// Route to show all NBA Players from database
-// =============================================
-app.get('/api/index', (req, res) => {
+// ================================================
+// 1. Route to SHOW all NBA Players from database
+// ================================================
+app.get('/api/nbaplayers', (req, res) => {
+  
+  db.NBAPlayers.find(function(err, nbaPlayers){
+    if (err) { return console.log("index error: " + err); }
+    res.json(nbaPlayers);
+  });
+
+});
+
+// =======================================
+// 2. Route to SHOW one NBA Player by id
+// =======================================
+app.get('/api/nbaplayers/:id', (req, res) => {
+  
+  db.NBAPlayers.find(function(err, nbaPlayers){
+    if (err) { return console.log("index error: " + err); }
+    res.json(nbaPlayers);
+  });
+
+});
+
+// ==================================
+// 3. Route to CREATE NBA Player
+// ==================================
+app.post('/api/nbaplayers', (req, res) => {
+  
+  db.NBAPlayers.find(function(err, nbaPlayers){
+    if (err) { return console.log("index error: " + err); }
+    res.json(nbaPlayers);
+  });
+
+});
+
+// =====================================
+// 4. Route to UPDATE NBA Player by id
+// =====================================
+app.put('/api/nbaplayers/:id', (req, res) => {
   
   db.NBAPlayers.find(function(err, nbaPlayers){
     if (err) { return console.log("index error: " + err); }
@@ -88,45 +128,9 @@ app.get('/api/index', (req, res) => {
 });
 
 // ====================================
-// Route to show one NBA Player by id
+// 5. Route to DELETE NBA Player by id
 // ====================================
-app.get('/api/index/:id', (req, res) => {
-  
-  db.NBAPlayers.find(function(err, nbaPlayers){
-    if (err) { return console.log("index error: " + err); }
-    res.json(nbaPlayers);
-  });
-
-});
-
-// ==================================
-// Route to create NBA Player by id
-// ==================================
-app.post('/api/index', (req, res) => {
-  
-  db.NBAPlayers.find(function(err, nbaPlayers){
-    if (err) { return console.log("index error: " + err); }
-    res.json(nbaPlayers);
-  });
-
-});
-
-// ==================================
-// Route to update NBA Player by id
-// ==================================
-app.post('/api/index', (req, res) => {
-  
-  db.NBAPlayers.find(function(err, nbaPlayers){
-    if (err) { return console.log("index error: " + err); }
-    res.json(nbaPlayers);
-  });
-
-});
-
-// ===================================
-// Route to delete NBA Player by id
-// ===================================
-app.delete('/api/index/:id', (req, res) => {
+app.delete('/api/nbaplayers/:id', (req, res) => {
   
   db.NBAPlayers.find(function(err, nbaPlayers){
     if (err) { return console.log("index error: " + err); }
