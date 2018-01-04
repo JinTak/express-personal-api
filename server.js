@@ -161,7 +161,7 @@ app.post('/api/nbaplayers', (req, res) => {
 app.put('/api/nbaplayers/:id', (req, res) => {
   
   if(!req.body.name || !req.body.nickname || !req.body.number || !req.body.position || !req.body.team ){
-    res.json("Please enter title, author, image, and releaseDate properties.");
+    res.json("Please enter name, nickname, number, position, and team properties.");
   } else {
     db.NBAPlayers.findOneAndUpdate({_id: req.params.id}, {$set:{name:req.body.name, nickname:req.body.nickname, number:req.body.number, position:req.body.position, team:req.body.team}}, {new:true}, function(err, nbaPlayer){
       if(err) {
@@ -186,12 +186,10 @@ app.delete('/api/nbaplayers/:id', (req, res) => {
 
     db.NBAPlayers.remove( {_id: req.params.id }, (err) => {
       if(err) {
-        res.json("Error: Player was not removed.")
-        console.log("Error: Player was not removed.")
+        res.json("Error: Player was not removed.");
       }
       else {
-        res.json("Successfully removed " + playerToDelete + "!")
-        console.log("Successfully removed " + playerToDelete + "!");}
+        res.json("Successfully removed " + playerToDelete + "!");
     }); 
     
   });
