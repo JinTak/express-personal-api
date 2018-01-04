@@ -60,9 +60,31 @@ app.get('/api', function api_index(req, res) {
 // Route to Profile API
 // =====================
 app.get('/api/profile', (req, res) => {
+ 
+  let birthDate = new Date(1989, 08, 04);
 
+  let today = new Date();
+
+  let myBirthMonth = 9;
+  let myBirthDay = 4;
+  let myBirthYear = 1989;
+
+  let time = today.getHours();
+  let isawake = false;
+  let isHungry = false;
+
+  if(time > 8 && time < 22) {
+    isawake = true;
+  }
+  if( (time > 11 && time < 13) || (time > 18 && time < 20)) {
+    isawake = true;
+  }
+  
   let jinProfile = {
     name: "Jin Tak",
+    days_old: birthDate,
+    is_awake: isawake,
+    is_hungry: isHungry,
     github_link: "https://github.com/JinTak",
     github_profile_image: "https://avatars0.githubusercontent.com/u/33187157?s=400&v=4",
     current_city: "Denver",
