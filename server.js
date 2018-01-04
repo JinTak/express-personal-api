@@ -50,7 +50,7 @@ app.get('/api', function api_index(req, res) {
   })
 });
 
-app.get('/api/profile', function() {
+app.get('/api/profile', function(req, res) {
   var jinProfile = {
     name: "Jin Tak",
     github_link: "https://github.com/JinTak",
