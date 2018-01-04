@@ -60,20 +60,32 @@ app.get('/api', function api_index(req, res) {
 // Route to Profile API
 // =====================
 app.get('/api/profile', (req, res) => {
- 
-  let birthDate = new Date(1989, 08, 04);
-
   let today = new Date();
+  console.log(today.getFullYear());
 
-  let myBirthMonth = 9;
-  let myBirthDay = 4;
-  let myBirthYear = 1989;
+  // Figuring out how many days old I am
+  let birthDate = new Date(1989, 08, 04);
+  // First figure out how many days I was alive in my birth year. I was born 9/4/1989. This value will be a constant
+  const daysAliveInBirthYear = 26 + 31 + 30 + 31; // 118 DAYS => 26 days in Sep, 31 days in Oct, 30 days in Nov, 31 days in Dec
+  // console.log(daysAliveInBirthYear);
 
+  // Next figure out how many days I was alive inbetween 1990 and current year minus one
+  let daysAliveBetween = 365 * (today.getFullYear() - 1990); // 10,220 days (365 * 28);
+  // console.log(daysAliveBetween);
+
+  // Next figure out how many days I was alive this year
+  let daysAliveThisYear = today.getMonth() + today.getDay();
+  // console.log(daysAliveThisYear);
+  
+  // Now, add all days together
+  let totalDaysAlive = daysAliveInBirthYear + daysAliveBetween + daysAliveThisYear;
+
+  // Figuring out if I am hungry and awake.
   let time = today.getHours();
   let isawake = false;
   let isHungry = false;
 
-  if(time > 8 && time < 22) {
+  if(time >= 8 && time <= 22) {
     isawake = true;
   }
   if( (time > 11 && time < 13) || (time > 18 && time < 20)) {
@@ -82,7 +94,7 @@ app.get('/api/profile', (req, res) => {
   
   let jinProfile = {
     name: "Jin Tak",
-    days_old: birthDate,
+    days_old: totalDaysAlive,
     is_awake: isawake,
     is_hungry: isHungry,
     github_link: "https://github.com/JinTak",
@@ -149,9 +161,7 @@ app.post('/api/nbaplayers', (req, res) => {
       if(err) {
         console.log("Sorry, could not create new player.")
       } else {
-        
           res.json("Created new player: " + nbaPlayer);
-        
       }
     });
   }
