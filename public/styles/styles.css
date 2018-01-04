@@ -16,9 +16,9 @@ body {
 
 h1 {
   text-align: center;
-  color: #e1e1e1;
+  color: yellow;
   font-size: 100px;
-  font-family: 'Bungee Shade';
+  font-family: 'Bungee Shade', sans-serif;
 }
 
 h4 {
@@ -27,9 +27,9 @@ h4 {
   
 }
 a {
-  color: #e1e1e1;
+  color: yellow;
   font-size: 50px;
-  font-family: 'Bungee Shade';
+  font-family: 'Righteous', sans-serif;
 }
 
 a:hover {
