@@ -60,6 +60,7 @@ app.get('/api', function api_index(req, res) {
 // Route to Profile API
 // =====================
 app.get('/api/profile', (req, res) => {
+
   let jinProfile = {
     name: "Jin Tak",
     github_link: "https://github.com/JinTak",
@@ -96,9 +97,11 @@ app.get('/api/nbaplayers', (req, res) => {
 // =======================================
 app.get('/api/nbaplayers/:id', (req, res) => {
   
-  db.NBAPlayers.find(function(err, nbaPlayers){
-    if (err) { return console.log("index error: " + err); }
-    res.json(nbaPlayers);
+  db.NBAPlayers.findById(req.params.id, (err, nbaPlayer) => {
+    if(err) {
+      res.json("Sorry, Player was not found.");
+    }
+    res.json(nbaPlayer);
   });
 
 });
@@ -108,9 +111,24 @@ app.get('/api/nbaplayers/:id', (req, res) => {
 // ==================================
 app.post('/api/nbaplayers', (req, res) => {
   
-  db.NBAPlayers.find(function(err, nbaPlayers){
-    if (err) { return console.log("index error: " + err); }
-    res.json(nbaPlayers);
+  var newPlayer = new db.NBAPlayers({
+    name: req.body.name,
+    nickname: req.body.nickname,
+    number: req.body.number,
+    position: req.body.position,
+    team: req.body.team
+  }); 
+
+  db.NBAPlayers.create(newPlayer, (err, nbaPlayer) => {
+    if(err) {
+      console.log("Sorry, could not create new player.")
+    } else {
+      if(!req.body.name || !req.body.nickname || !req.body.number || !req.body.position || !req.body.team ){
+        res.json("Please enter name, nickname, number, position, and team properties.");
+      } else {
+        res.json("Created new player: " + nbaPlayer);
+      }
+    }
   });
 
 });
@@ -120,10 +138,19 @@ app.post('/api/nbaplayers', (req, res) => {
 // =====================================
 app.put('/api/nbaplayers/:id', (req, res) => {
   
-  db.NBAPlayers.find(function(err, nbaPlayers){
-    if (err) { return console.log("index error: " + err); }
-    res.json(nbaPlayers);
-  });
+  if(!req.body.name || !req.body.nickname || !req.body.number || !req.body.position || !req.body.team ){
+    res.json("Please enter title, author, image, and releaseDate properties.");
+  } else {
+    db.NBAPlayers.findOneAndUpdate({_id: req.params.id}, {$set:{name:req.body.name, nickname:req.body.nickname, number:req.body.number, position:req.body.position, team:req.body.team}}, {new:true}, function(err, nbaPlayer){
+      if(err) {
+        res.json("Sorry, NBA player not found.");
+      }
+      else {
+        res.json("Found and updated the player.");
+        console.log(nbaPlayer);
+      };
+    });
+  }
 
 });
 
@@ -132,14 +159,30 @@ app.put('/api/nbaplayers/:id', (req, res) => {
 // ====================================
 app.delete('/api/nbaplayers/:id', (req, res) => {
   
-  db.NBAPlayers.find(function(err, nbaPlayers){
-    if (err) { return console.log("index error: " + err); }
-    res.json(nbaPlayers);
+  db.NBAPlayers.findById(req.params.id, function (err, nbaPlayer) {
+    var playerToDelete = nbaPlayer;
+
+    db.NBAPlayers.remove( {_id: req.params.id }, (err) => {
+      if(err) {
+        res.json("Error: Player was not removed.")
+        console.log("Error: Player was not removed.")
+      }
+      else {
+        res.json("Successfully removed " + playerToDelete + "!")
+        console.log("Successfully removed " + playerToDelete + "!");}
+    }); 
+    
   });
 
 });
 
 
+// Catch URL's that have no specified route
+app.get('*', (req, res) => {
+  
+  res.json("Sorry this page does not exist!");
+
+});
 
 
 /**********
