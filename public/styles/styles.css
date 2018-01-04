@@ -2,9 +2,36 @@ body {
   color: #333;
   font-family: Helvetica, Arial, sans-serif;
   background-image: url('/images/main-background.jpg'); /* Sanity Check! */
+  background-size: cover;
+  
+}
+
+.text-container {
+  margin-top: 50px;
+  border: 10px solid #000;
+  border-radius: 20px;
+  padding: 30px;
+  background: rgba(100, 100, 100, .7);
 }
 
 h1 {
+  text-align: center;
+  color: #e1e1e1;
+  font-size: 100px;
+  font-family: 'Bungee Shade';
+}
+
+h4 {
   margin-top: 100px;
   text-align: center;
+  
+}
+a {
+  color: #e1e1e1;
+  font-size: 50px;
+  font-family: 'Bungee Shade';
+}
+
+a:hover {
+  color: black;
 }

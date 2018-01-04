@@ -1,6 +1,8 @@
+// import { NBAPlayers } from './models/index';
+
 // require express and other modules
-var express = require('express'),
-    app = express();
+var express = require('express');
+var app = express();
 
 // parse incoming urlencoded form data
 // and populate the req.body object
@@ -12,7 +14,7 @@ app.use(bodyParser.json());
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
 
 /**********
  * ROUTES *
@@ -45,7 +47,7 @@ app.get('/api', function api_index(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET", path: "/api/index", description: "Shows my favorite NBA players."} // CHANGE ME
     ]
   })
 });
@@ -54,7 +56,7 @@ app.get('/api', function api_index(req, res) {
 // Route to Profile API
 // =====================
 app.get('/api/profile', (req, res) => {
-  var jinProfile = {
+  let jinProfile = {
     name: "Jin Tak",
     github_link: "https://github.com/JinTak",
     github_profile_image: "https://avatars0.githubusercontent.com/u/33187157?s=400&v=4",
@@ -69,10 +71,67 @@ app.get('/api/profile', (req, res) => {
   res.json(jinProfile);
 });
 
-// =====================
-// Route to...
-// =====================
+////////////////////
+//  CRUD ROUTES
+///////////////////
+
+// =============================================
+// Route to show all NBA Players from database
+// =============================================
 app.get('/api/index', (req, res) => {
+  
+  db.NBAPlayers.find(function(err, nbaPlayers){
+    if (err) { return console.log("index error: " + err); }
+    res.json(nbaPlayers);
+  });
+
+});
+
+// ====================================
+// Route to show one NBA Player by id
+// ====================================
+app.get('/api/index/:id', (req, res) => {
+  
+  db.NBAPlayers.find(function(err, nbaPlayers){
+    if (err) { return console.log("index error: " + err); }
+    res.json(nbaPlayers);
+  });
+
+});
+
+// ==================================
+// Route to create NBA Player by id
+// ==================================
+app.post('/api/index', (req, res) => {
+  
+  db.NBAPlayers.find(function(err, nbaPlayers){
+    if (err) { return console.log("index error: " + err); }
+    res.json(nbaPlayers);
+  });
+
+});
+
+// ==================================
+// Route to update NBA Player by id
+// ==================================
+app.post('/api/index', (req, res) => {
+  
+  db.NBAPlayers.find(function(err, nbaPlayers){
+    if (err) { return console.log("index error: " + err); }
+    res.json(nbaPlayers);
+  });
+
+});
+
+// ===================================
+// Route to delete NBA Player by id
+// ===================================
+app.delete('/api/index/:id', (req, res) => {
+  
+  db.NBAPlayers.find(function(err, nbaPlayers){
+    if (err) { return console.log("index error: " + err); }
+    res.json(nbaPlayers);
+  });
 
 });
 
