@@ -35,3 +35,18 @@ a {
 a:hover {
   color: white;
 }
+
+.container-2 {
+  text-align: center;
+}  
+
+#getAllPlayers {
+  width: 300px;
+  padding: 20px;
+  border-radius: 5px;
+  background: blue;
+  color: white;
+  font-size: 20px;
+  margin-top: 30px;
+  outline: none;
+}

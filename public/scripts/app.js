@@ -2,6 +2,14 @@ console.log("Sanity Check: JS is working!");
 
 $(document).ready(function(){
 
-// your code
+    $('#getAllPlayers').on('click', function(){
+        $.ajax({
+            url: "test.html",
+            cache: false,
+            success: function(html){
+              $("#results").append(html);
+            }
+          });
+    });
 
 });

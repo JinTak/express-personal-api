@@ -188,7 +188,6 @@ app.put('/api/nbaplayers/:id', (req, res) => {
       };
     });
   }
-
 });
 
 // ====================================
@@ -196,20 +195,15 @@ app.put('/api/nbaplayers/:id', (req, res) => {
 // ====================================
 app.delete('/api/nbaplayers/:id', (req, res) => {
   
-  db.NBAPlayers.findById(req.params.id, function (err, nbaPlayer) {
-    var playerToDelete = nbaPlayer;
-
-    db.NBAPlayers.remove( {_id: req.params.id }, (err) => {
-      if(err) {
-        res.json("Error: Player was not removed.");
-      }
-      else {
-        res.json("Successfully removed " + playerToDelete + "!");
-      }
-    }); 
-    
-  });
-
+  db.NBAPlayers.remove( {_id: req.params.id }, (err, nbaplayer) => {
+    if(err) {
+      res.json("Error: Player was not removed.");
+    }
+    else {
+      res.json("Successfully removed the player!");
+    }
+  }); 
+   
 });
 
 
